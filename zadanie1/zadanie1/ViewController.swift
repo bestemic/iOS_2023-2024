@@ -105,8 +105,23 @@ class ViewController: UIViewController {
             currentInput = ""
         }
         
-        performOperation()
-        operation = ""
+        if operation.isEmpty{
+            print(currentNumber)
+            
+            let integerPart = Int(currentNumber)
+            let decimalPart = currentNumber - Double(integerPart)
+            
+            if decimalPart != 0.0 {
+                resultsLabel.text = String(currentNumber)
+            } else{
+                guard let dotIndex = String(currentNumber).firstIndex(of: ".") else { return }
+                let integerPart = String(currentNumber)[..<dotIndex]
+                resultsLabel.text = String(integerPart)
+            }
+        } else{
+            performOperation()
+            operation = ""
+        }
     }
     
     @IBAction func strokeButton(_ sender: Any) {
@@ -122,6 +137,18 @@ class ViewController: UIViewController {
             resultsLabel.text = currentInput
         }
     }
+    
+    @IBAction func changeSign(_ sender: Any) {
+        if !currentInput.isEmpty{
+            if currentInput.hasPrefix("-"){
+                currentInput.remove(at: currentInput.startIndex)
+            }else{
+                currentInput = "-" + currentInput
+            }
+            resultsLabel.text = currentInput
+        }
+    }
+    
     
     @IBAction func zeroButton(_ sender: Any) {
         if currentInput != "0"{
