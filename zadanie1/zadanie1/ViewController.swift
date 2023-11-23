@@ -51,7 +51,6 @@ class ViewController: UIViewController {
         
         currentNumber = previousNumber
         
-        
         let integerPart = Int(currentNumber)
         let decimalPart = currentNumber - Double(integerPart)
         
@@ -149,6 +148,18 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func percentButton(_ sender: Any) {
+        if !currentInput.isEmpty {
+            currentNumber = Double(currentInput) ?? 0.0
+            currentInput = ""
+            
+            currentNumber *= 0.01
+            resultsLabel.text = String(currentNumber)
+        } else if currentNumber != 0.0 {
+            currentNumber *= 0.01
+            resultsLabel.text = String(currentNumber)
+        }
+    }
     
     @IBAction func zeroButton(_ sender: Any) {
         if currentInput != "0"{
