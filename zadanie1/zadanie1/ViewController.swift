@@ -161,6 +161,72 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func powButton(_ sender: Any) {
+        if !currentInput.isEmpty {
+            currentNumber = Double(currentInput) ?? 0.0
+            currentInput = ""
+            
+            currentNumber = pow(currentNumber, 2)
+            
+            let integerPart = Int(currentNumber)
+            let decimalPart = currentNumber - Double(integerPart)
+            
+            if decimalPart != 0.0 {
+                resultsLabel.text = String(currentNumber)
+            } else{
+                guard let dotIndex = String(currentNumber).firstIndex(of: ".") else { return }
+                let integerPart = String(currentNumber)[..<dotIndex]
+                resultsLabel.text = String(integerPart)
+            }
+        } else if currentNumber != 0.0 {
+            currentNumber = pow(currentNumber, 2)
+            
+            let integerPart = Int(currentNumber)
+            let decimalPart = currentNumber - Double(integerPart)
+            
+            if decimalPart != 0.0 {
+                resultsLabel.text = String(currentNumber)
+            } else{
+                guard let dotIndex = String(currentNumber).firstIndex(of: ".") else { return }
+                let integerPart = String(currentNumber)[..<dotIndex]
+                resultsLabel.text = String(integerPart)
+            }
+        }
+    }
+    
+    @IBAction func logButton(_ sender: Any) {
+        if !currentInput.isEmpty {
+            currentNumber = Double(currentInput) ?? 0.0
+            currentInput = ""
+            
+            currentNumber = log10(currentNumber)
+            
+            let integerPart = Int(currentNumber)
+            let decimalPart = currentNumber - Double(integerPart)
+            
+            if decimalPart != 0.0 {
+                resultsLabel.text = String(currentNumber)
+            } else{
+                guard let dotIndex = String(currentNumber).firstIndex(of: ".") else { return }
+                let integerPart = String(currentNumber)[..<dotIndex]
+                resultsLabel.text = String(integerPart)
+            }
+        } else if currentNumber != 0.0 {
+            currentNumber = log10(currentNumber)
+            
+            let integerPart = Int(currentNumber)
+            let decimalPart = currentNumber - Double(integerPart)
+            
+            if decimalPart != 0.0 {
+                resultsLabel.text = String(currentNumber)
+            } else{
+                guard let dotIndex = String(currentNumber).firstIndex(of: ".") else { return }
+                let integerPart = String(currentNumber)[..<dotIndex]
+                resultsLabel.text = String(integerPart)
+            }
+        }
+    }
+    
     @IBAction func zeroButton(_ sender: Any) {
         if currentInput != "0"{
             currentInput += "0"
