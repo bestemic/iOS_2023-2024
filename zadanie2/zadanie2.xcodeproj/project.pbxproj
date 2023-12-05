@@ -13,6 +13,7 @@
 		016D2B012B1E6A3500B6A19C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016D2B002B1E6A3500B6A19C /* Preview Assets.xcassets */; };
 		016D2B082B1E6CA800B6A19C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D2B072B1E6CA800B6A19C /* Task.swift */; };
 		016D2B0D2B1E71A000B6A19C /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D2B0C2B1E71A000B6A19C /* TaskView.swift */; };
+		01BD33F62B1F35D70058F0BE /* TaskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BD33F52B1F35D70058F0BE /* TaskStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		016D2B002B1E6A3500B6A19C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		016D2B072B1E6CA800B6A19C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		016D2B0C2B1E71A000B6A19C /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		01BD33F52B1F35D70058F0BE /* TaskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				016D2AFF2B1E6A3500B6A19C /* Preview Content */,
 				016D2B072B1E6CA800B6A19C /* Task.swift */,
 				016D2B0C2B1E71A000B6A19C /* TaskView.swift */,
+				01BD33F52B1F35D70058F0BE /* TaskStatus.swift */,
 			);
 			path = zadanie2;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				016D2AFC2B1E6A3400B6A19C /* TasksView.swift in Sources */,
 				016D2B082B1E6CA800B6A19C /* Task.swift in Sources */,
 				016D2AFA2B1E6A3400B6A19C /* zadanie2App.swift in Sources */,
+				01BD33F62B1F35D70058F0BE /* TaskStatus.swift in Sources */,
 				016D2B0D2B1E71A000B6A19C /* TaskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

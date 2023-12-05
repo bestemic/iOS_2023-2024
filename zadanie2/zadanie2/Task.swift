@@ -11,4 +11,5 @@ struct Task: Identifiable {
     let id: Int
     let title: String
     let image: String
+    var status: TaskStatus?
 }
