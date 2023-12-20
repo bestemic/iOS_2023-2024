@@ -11,14 +11,16 @@ import CoreData
 struct CategoryView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var category: Category
-
+    @ObservedObject var cart: Cart
+    
     @FetchRequest(
         sortDescriptors: [],
         animation: .default)
     private var products: FetchedResults<Product>
     
-    init(category: Category) {
+    init(category: Category, cart: Cart) {
         self.category = category
+        self.cart = cart
         _products = FetchRequest(
             sortDescriptors: [],
             predicate: NSPredicate(format: "category == %@", argumentArray: [category]),
@@ -39,7 +41,7 @@ struct CategoryView: View {
             List {
                 ForEach(products) { product in
                     HStack{
-                        NavigationLink(product.name!, destination: ProductView(product: product))
+                        NavigationLink(product.name!, destination: ProductView(product: product, cart: cart))
                     }
                 }
             }

@@ -16,15 +16,29 @@ struct ContentView: View {
         animation: .default)
     private var categories: FetchedResults<Category>
     
+    @ObservedObject var cart = Cart()
+    @State var tabSelection = 0
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(categories) { category in
-                    HStack{
-                        NavigationLink(category.name!, destination: CategoryView(category: category))
+        
+        TabView(selection: $tabSelection) {
+            NavigationView {
+                List {
+                    ForEach(categories) { category in
+                        HStack{
+                            NavigationLink(category.name!, destination: CategoryView(category: category, cart: cart))
+                        }
                     }
                 }
-            }
+            }.tabItem {
+                Image(systemName: "list.dash")
+                Text("Categories")
+            }.tag(0)
+            
+            CartView(cart: cart).tabItem {
+                Image(systemName: "cart")
+                Text("Cart")
+            }.tag(1)
         }
     }
 }

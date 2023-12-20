@@ -10,6 +10,7 @@ import CoreData
 
 struct ProductView: View {
     var product: Product
+    @ObservedObject var cart: Cart
     
     var body: some View {
         VStack {
@@ -19,6 +20,16 @@ struct ProductView: View {
                 .padding()
             Text("Product Category: \(product.category?.name ?? "")")
                 .padding()
+            Button(action: {
+                cart.addProduct(product)
+                print(cart)
+            }) {
+                Text("Add to Cart")
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(8)
+            }
             Spacer()
         }
         .navigationBarTitle("Product Details", displayMode: .inline)
