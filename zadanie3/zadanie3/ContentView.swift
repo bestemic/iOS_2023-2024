@@ -8,6 +8,18 @@
 import SwiftUI
 import CoreData
 
+class CartItems: ObservableObject {
+    @Published var items: [String: Int] = [:]
+    
+    func addToCart(key: String) {
+        if let existingValue = items[key] {
+            items[key] = existingValue + 1
+        } else {
+            items[key] = 1
+        }
+    }
+}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -16,8 +28,9 @@ struct ContentView: View {
         animation: .default)
     private var categories: FetchedResults<Category>
     
-    @ObservedObject var cart = Cart()
     @State var tabSelection = 0
+    
+    @ObservedObject var cart = CartItems()
     
     var body: some View {
         

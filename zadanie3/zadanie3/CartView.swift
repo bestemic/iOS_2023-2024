@@ -8,29 +8,36 @@
 import SwiftUI
 
 struct CartView: View {
-    var cart: Cart
+    @ObservedObject var cart: CartItems
     
     var body: some View {
-        NavigationView {
+        
+        VStack {
             List {
-                ForEach(cart.items) { cartItem in
-                    VStack {
-                        Text("Product Name: \(cartItem.product.name ?? "")")
-                            .padding()
-                        Text("Quantity: \(cartItem.quantity)")
-                            .padding()
-                        Spacer()
+                ForEach(cart.items.sorted(by: <), id: \.key) { key, value in
+                    HStack {
+                        Text(key)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Stepper(value: Binding(
+                            get: { value },
+                            set: { newValue in
+                                if newValue == 0 {
+                                    cart.items.removeValue(forKey: key)
+                                }
+                                else{
+                                    cart.items[key] = newValue
+                                }
+                            }
+                        )) {
+                            Label(
+                                title: { Text("\(value)") },
+                                icon: { Image(systemName: "42.circle") }
+                            ).labelStyle(.titleOnly)
+                        }
                     }
                 }
-                .onDelete(perform: deleteCartItem)
             }
-        }
-    }
-    
-    private func deleteCartItem(at offsets: IndexSet) {
-        for index in offsets {
-            let cartItem = cart.items[index]
-            cart.removeProduct(cartItem)
         }
     }
 }

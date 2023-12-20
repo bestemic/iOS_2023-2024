@@ -11,14 +11,14 @@ import CoreData
 struct CategoryView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var category: Category
-    @ObservedObject var cart: Cart
+    @ObservedObject var cart: CartItems
     
     @FetchRequest(
         sortDescriptors: [],
         animation: .default)
     private var products: FetchedResults<Product>
     
-    init(category: Category, cart: Cart) {
+    init(category: Category, cart: CartItems) {
         self.category = category
         self.cart = cart
         _products = FetchRequest(

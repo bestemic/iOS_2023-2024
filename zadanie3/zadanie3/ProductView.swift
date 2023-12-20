@@ -10,7 +10,7 @@ import CoreData
 
 struct ProductView: View {
     var product: Product
-    @ObservedObject var cart: Cart
+    @ObservedObject var cart: CartItems
     
     var body: some View {
         VStack {
@@ -21,8 +21,7 @@ struct ProductView: View {
             Text("Product Category: \(product.category?.name ?? "")")
                 .padding()
             Button(action: {
-                cart.addProduct(product)
-                print(cart)
+                cart.addToCart(key: product.name!)
             }) {
                 Text("Add to Cart")
                     .padding()
