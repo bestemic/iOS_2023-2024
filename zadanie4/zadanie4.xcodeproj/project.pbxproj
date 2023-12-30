@@ -17,6 +17,7 @@
 		0155871C2B3E13E0001818A5 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155871B2B3E13E0001818A5 /* CartView.swift */; };
 		0155871E2B3E13FF001818A5 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155871D2B3E13FF001818A5 /* ProductView.swift */; };
 		01CBBE1B2B404E680051BB58 /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CBBE1A2B404E680051BB58 /* OrdersView.swift */; };
+		01CBBE3C2B407CAB0051BB58 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CBBE3B2B407CAB0051BB58 /* AddProductView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		0155871B2B3E13E0001818A5 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		0155871D2B3E13FF001818A5 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		01CBBE1A2B404E680051BB58 /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
+		01CBBE3B2B407CAB0051BB58 /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				0155871B2B3E13E0001818A5 /* CartView.swift */,
 				0155871D2B3E13FF001818A5 /* ProductView.swift */,
 				01CBBE1A2B404E680051BB58 /* OrdersView.swift */,
+				01CBBE3B2B407CAB0051BB58 /* AddProductView.swift */,
 			);
 			path = zadanie4;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				0155871C2B3E13E0001818A5 /* CartView.swift in Sources */,
 				0155870D2B3E11CC001818A5 /* Persistence.swift in Sources */,
 				015587102B3E11CC001818A5 /* zadanie4.xcdatamodeld in Sources */,
+				01CBBE3C2B407CAB0051BB58 /* AddProductView.swift in Sources */,
 				015587062B3E11CB001818A5 /* ContentView.swift in Sources */,
 				0155871E2B3E13FF001818A5 /* ProductView.swift in Sources */,
 				01CBBE1B2B404E680051BB58 /* OrdersView.swift in Sources */,

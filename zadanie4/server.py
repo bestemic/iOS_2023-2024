@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -51,7 +51,7 @@ orders_data = [
     },
     {
         'id': 3,
-        'total_value': 79.98,
+        'total_value': 1594.96,
         'order_date': '2023-09-12',
         'order_status': 'SEND',
         'products': [2, 4, 5, 6],
@@ -70,6 +70,28 @@ def get_products_for_category(category_id):
 @app.route('/orders', methods=['GET'])
 def get_orders():
     return jsonify(orders_data)
+
+@app.route('/product', methods=['POST'])
+def add_product():
+    try:
+        data = request.get_json()
+        
+        name = data.get('name')
+        price = data.get('price')
+        category_id = data.get('category_id')
+        
+        new_product = {
+            'id': len(products_data) + 1,
+            'name': name,
+            'price': price,
+            'category_id': category_id
+        }
+
+        products_data.append(new_product)
+
+        return jsonify(new_product['id']), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

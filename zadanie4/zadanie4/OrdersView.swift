@@ -9,9 +9,10 @@ import SwiftUI
 
 struct OrdersView: View {
     @Environment(\.managedObjectContext) private var viewContext
+
     
     @FetchRequest(
-        sortDescriptors: [],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Order.id, ascending: true)],
         animation: .default)
     private var orders: FetchedResults<Order>
     
@@ -21,9 +22,7 @@ struct OrdersView: View {
             List(orders, id: \.id) { order in
                 OrderRow(order: order)
             }
-//            .navigationTitle("Orders", displayMode: .inline)
             .navigationBarTitle("Orders", displayMode: .inline)
-
         }
     }
     

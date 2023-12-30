@@ -13,6 +13,16 @@ struct zadanie4App: App {
     let persistenceController = PersistenceController.shared
     
     init() {
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Order.fetchRequest()
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+                do {
+                    try persistenceController.container.viewContext.execute(deleteRequest)
+                } catch {
+                    print(error.localizedDescription)
+                }
+        
         loadCategoriesFromAPI()
         loadProductsFromAPI()
         loadOrdersFromAPI()

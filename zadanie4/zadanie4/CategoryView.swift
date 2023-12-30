@@ -13,6 +13,8 @@ struct CategoryView: View {
     @ObservedObject var category: Category
     @ObservedObject var cart: CartItems
     
+    @State private var isPresented: Bool = false
+    
     @FetchRequest(
         sortDescriptors: [],
         animation: .default)
@@ -44,6 +46,15 @@ struct CategoryView: View {
                         NavigationLink(product.name!, destination: ProductView(product: product, cart: cart))
                     }
                 }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add Product", systemImage: "plus") {
+                        isPresented = true
+                    }
+                }
+            }.sheet(isPresented: $isPresented) {
+                AddProductView(category: category)
             }
         }
         .navigationBarTitle("", displayMode: .inline)
