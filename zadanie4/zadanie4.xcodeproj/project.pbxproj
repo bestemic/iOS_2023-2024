@@ -16,6 +16,7 @@
 		0155871A2B3E13B0001818A5 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015587192B3E13B0001818A5 /* CategoryView.swift */; };
 		0155871C2B3E13E0001818A5 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155871B2B3E13E0001818A5 /* CartView.swift */; };
 		0155871E2B3E13FF001818A5 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155871D2B3E13FF001818A5 /* ProductView.swift */; };
+		01CBBE1B2B404E680051BB58 /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CBBE1A2B404E680051BB58 /* OrdersView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		015587192B3E13B0001818A5 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		0155871B2B3E13E0001818A5 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		0155871D2B3E13FF001818A5 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		01CBBE1A2B404E680051BB58 /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				015587192B3E13B0001818A5 /* CategoryView.swift */,
 				0155871B2B3E13E0001818A5 /* CartView.swift */,
 				0155871D2B3E13FF001818A5 /* ProductView.swift */,
+				01CBBE1A2B404E680051BB58 /* OrdersView.swift */,
 			);
 			path = zadanie4;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				015587102B3E11CC001818A5 /* zadanie4.xcdatamodeld in Sources */,
 				015587062B3E11CB001818A5 /* ContentView.swift in Sources */,
 				0155871E2B3E13FF001818A5 /* ProductView.swift in Sources */,
+				01CBBE1B2B404E680051BB58 /* OrdersView.swift in Sources */,
 				015587042B3E11CB001818A5 /* zadanie4App.swift in Sources */,
 				0155871A2B3E13B0001818A5 /* CategoryView.swift in Sources */,
 			);

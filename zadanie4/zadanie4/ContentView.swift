@@ -52,6 +52,11 @@ struct ContentView: View {
                 Image(systemName: "cart")
                 Text("Cart")
             }.tag(1)
+            
+            OrdersView().tabItem {
+                Image(systemName: "giftcard.fill")
+                Text("Orders")
+            }.tag(1)
         }
     }
 }

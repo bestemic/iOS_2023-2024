@@ -34,6 +34,30 @@ products_data = [
     {'id': 6, 'name': 'Mystery', 'price': 24.99, 'category_id': 3},
 ]
 
+orders_data = [
+    {
+        'id': 1,
+        'total_value': 124.98,
+        'order_date': '2023-01-01',
+        'order_status': 'PROCESSING',
+        'products': [1, 3],
+    },
+    {
+        'id': 2,
+        'total_value': 79.98,
+        'order_date': '2023-01-02',
+        'order_status': 'SHIPPED',
+        'products': [2, 4],
+    },
+    {
+        'id': 3,
+        'total_value': 79.98,
+        'order_date': '2023-09-12',
+        'order_status': 'SEND',
+        'products': [2, 4, 5, 6],
+    },
+]
+
 @app.route('/categories', methods=['GET'])
 def get_categories():
     return jsonify(categories_data)
@@ -42,6 +66,10 @@ def get_categories():
 def get_products_for_category(category_id):
     category_products = [product for product in products_data if product['category_id'] == category_id]
     return jsonify(category_products)
+
+@app.route('/orders', methods=['GET'])
+def get_orders():
+    return jsonify(orders_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
