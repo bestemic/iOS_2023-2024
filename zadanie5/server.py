@@ -7,6 +7,8 @@ users_db = [
     {"username": "user1", "password": "password1", "first_name": "John", "last_name": "Doe"},
 ]
 
+token_db = {}
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -36,6 +38,15 @@ def register():
     users_db.append(new_user)
     print(new_user)
     return jsonify({"username": new_user['username'], "firstName": new_user['first_name'], "lastName": new_user['last_name']}), 201
+
+@app.route('/token', methods=['POST'])
+def save_token():
+    data = request.get_json()
+    id = data.get('id')
+    token = data.get('token')
+
+    token_db[id] = token
+    return jsonify({"message": "Token saved successfully"}), 201
 
 if __name__ == '__main__':
     app.run(debug=True)

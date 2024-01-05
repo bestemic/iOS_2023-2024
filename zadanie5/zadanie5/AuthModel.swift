@@ -125,6 +125,7 @@ class AuthModel: ObservableObject {
                 print("Error! \(String(describing: error))")
                 return
             }
+            self.sendToken(id: signInResult.user.profile!.email, token: signInResult.user.accessToken.tokenString)
             self.user = User(firstName: signInResult.user.profile!.name, lastName: "", username: signInResult.user.profile!.email)
         }
     }
@@ -139,8 +140,36 @@ class AuthModel: ObservableObject {
             let request = GraphRequest(graphPath: "me", parameters: ["fields" : "id,first_name,last_name"])
             request.start { (_, res, _) in
                 guard let profileData = res as? [String : Any] else {return}
+                self.sendToken(id: profileData["id"] as! String, token: result!.token!.tokenString)
                 self.user = User(firstName: profileData["first_name"] as! String, lastName: profileData["last_name"] as! String, username: profileData["id"] as! String)
             }
         }
+    }
+    
+    func sendToken(id:String, token:String) {
+        guard let url = URL(string: "\(baseURL)/token") else {
+            return
+        }
+        
+        let tokenData: [String: Any] = [
+            "id": id,
+            "token": token
+        ]
+        
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: tokenData) else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { _, _, error in
+            if error == nil {
+                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+        }.resume()
     }
 }
