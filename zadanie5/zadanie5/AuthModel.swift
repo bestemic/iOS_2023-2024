@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import GoogleSignIn
+import SwiftUI
+import FBSDKLoginKit
 
 class AuthModel: ObservableObject {
     @Published var user: User?
@@ -112,5 +115,32 @@ class AuthModel: ObservableObject {
     func showAlert(message: String) {
         alertMessage = message
         isShowingAlert = true
+    }
+    
+    func signInGoogle() {
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, error in
+            guard let signInResult = signInResult else {
+                print("Error! \(String(describing: error))")
+                return
+            }
+            self.user = User(firstName: signInResult.user.profile!.name, lastName: "", username: signInResult.user.profile!.email)
+        }
+    }
+    
+    func signInFb() {
+        LoginManager().logIn(permissions: ["public_profile"], from: nil) { result, error in
+            if error != nil {
+                print("Error")
+                return
+            }
+            
+            let request = GraphRequest(graphPath: "me", parameters: ["fields" : "id,first_name,last_name"])
+            request.start { (_, res, _) in
+                guard let profileData = res as? [String : Any] else {return}
+                self.user = User(firstName: profileData["first_name"] as! String, lastName: profileData["last_name"] as! String, username: profileData["id"] as! String)
+            }
+        }
     }
 }

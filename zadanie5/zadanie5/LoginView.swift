@@ -46,6 +46,9 @@ struct LoginView: View {
                     authModel.isShowingAlert = false
                     authModel.alertMessage = ""
                 }
+                Spacer()
+                
+                OAuthView()
                 
                 Spacer()
                 
