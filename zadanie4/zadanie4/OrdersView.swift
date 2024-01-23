@@ -47,13 +47,13 @@ struct OrderRow: View {
                 switch order.order_status{
                 case "PROCESSING":
                     Image(systemName: "gear")
-                        .foregroundColor(.blue) // Dostosuj kolor do swoich preferencji
+                        .foregroundColor(.blue)
                 case "SHIPPED":
                     Image(systemName: "shippingbox")
-                        .foregroundColor(.green) // Dostosuj kolor do swoich preferencji
+                        .foregroundColor(.green)
                 case "SEND":
                     Image(systemName: "paperplane")
-                        .foregroundColor(.purple) // Dostosuj kolor do swoich preferencji
+                        .foregroundColor(.purple)
                 default:
                     Text("Unknown Status")
                 }

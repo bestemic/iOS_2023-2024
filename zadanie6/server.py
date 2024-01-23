@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -70,6 +71,49 @@ def get_products_for_category(category_id):
 @app.route('/orders', methods=['GET'])
 def get_orders():
     return jsonify(orders_data)
+
+@app.route('/orders', methods=['POST'])
+def add_order():
+    try:
+        data = request.get_json()
+        print(data)
+        card_number = data.get('card_number')
+        ccv = data.get('ccv')
+        orders = data.get('orders', {})
+        
+        print(f"Making payment for card: {card_number}, ccv {ccv}")
+        print(orders)
+        
+        new_order_products = []
+        for product_id, quantity in orders.items():
+            for _ in range(quantity):
+                new_order_products.append(product_id)
+        
+        new_order = {
+            'id': len(orders_data) + 1,
+            'total_value': calculate_total_value(orders),
+            'order_date': get_current_date(),
+            'order_status': 'PROCESSING',  
+            'products': new_order_products
+        }
+
+        orders_data.append(new_order)
+        return jsonify(new_order), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+def calculate_total_value(orders):
+    total_value = 0.0
+
+    for product_id, quantity in orders.items():
+        product = next((p for p in products_data if p['id'] == int(product_id)), None)
+        if product:
+            total_value += float(product['price']) * quantity
+
+    return round(total_value, 2)
+
+def get_current_date():
+    return datetime.now().strftime('%Y-%m-%d')
 
 @app.route('/product', methods=['POST'])
 def add_product():
