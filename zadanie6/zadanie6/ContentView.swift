@@ -9,13 +9,13 @@ import SwiftUI
 import CoreData
 
 class CartItems: ObservableObject {
-    @Published var items: [String: Int] = [:]
+    @Published var items: [Int: Int] = [:]
     
-    func addToCart(key: String) {
-        if let existingValue = items[key] {
-            items[key] = existingValue + 1
+    func addToCart(productId: Int) {
+        if let existingValue = items[productId] {
+            items[productId] = existingValue + 1
         } else {
-            items[key] = 1
+            items[productId] = 1
         }
     }
 }

@@ -13,16 +13,6 @@ struct zadanie6App: App {
     let persistenceController = PersistenceController.shared
     
     init() {
-        
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Order.fetchRequest()
-                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-                do {
-                    try persistenceController.container.viewContext.execute(deleteRequest)
-                } catch {
-                    print(error.localizedDescription)
-                }
-        
         loadCategoriesFromAPI()
         loadProductsFromAPI()
         loadOrdersFromAPI()
@@ -200,6 +190,9 @@ extension zadanie6App {
                         let order_status = item["order_status"] as! String
                         let products = item["products"] as! [Int64]
                         
+                        let uniqueProductsSet: Set<Int64> = Set(products)
+                        let uniqueProductsArray: [Int64] = Array(uniqueProductsSet)
+                        
                         if let dateString = item["order_date"] as? String,
                            let order_date = dateFormatter.date(from: dateString) {
                             
@@ -212,8 +205,7 @@ extension zadanie6App {
                                 order.setValue(products, forKey: "ordered_items")
                                 
                                 let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Product")
-                                fetchRequest.predicate = NSPredicate(format: "id IN %@", products)
-                                
+                                fetchRequest.predicate = NSPredicate(format: "id IN %@", uniqueProductsArray)
                                 do {
                                     let products_data = try context.fetch(fetchRequest) as! [NSManagedObject]
                                     for product in products_data {
@@ -259,5 +251,34 @@ extension zadanie6App {
             print("Error")
         }
         return false
+    }
+    
+    func clearDB() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Order.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try persistenceController.container.viewContext.execute(deleteRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Product.fetchRequest()
+        let deleteRequest1 = NSBatchDeleteRequest(fetchRequest: fetchRequest1)
+        
+        do {
+            try persistenceController.container.viewContext.execute(deleteRequest1)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        let fetchRequest2: NSFetchRequest<NSFetchRequestResult> = Category.fetchRequest()
+        let deleteRequest2 = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
+        
+        do {
+            try persistenceController.container.viewContext.execute(deleteRequest2)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }

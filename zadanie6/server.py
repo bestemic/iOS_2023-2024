@@ -41,7 +41,7 @@ orders_data = [
         'total_value': 124.98,
         'order_date': '2023-01-01',
         'order_status': 'PROCESSING',
-        'products': [1, 3],
+        'products': [1, 3, 1],
     },
     {
         'id': 2,
@@ -76,18 +76,16 @@ def get_orders():
 def add_order():
     try:
         data = request.get_json()
-        print(data)
         card_number = data.get('card_number')
         ccv = data.get('ccv')
         orders = data.get('orders', {})
         
         print(f"Making payment for card: {card_number}, ccv {ccv}")
-        print(orders)
         
         new_order_products = []
         for product_id, quantity in orders.items():
             for _ in range(quantity):
-                new_order_products.append(product_id)
+                new_order_products.append(int(product_id))
         
         new_order = {
             'id': len(orders_data) + 1,

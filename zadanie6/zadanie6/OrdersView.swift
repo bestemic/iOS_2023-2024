@@ -9,7 +9,6 @@ import SwiftUI
 
 struct OrdersView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Order.id, ascending: true)],
@@ -47,13 +46,13 @@ struct OrderRow: View {
                 switch order.order_status{
                 case "PROCESSING":
                     Image(systemName: "gear")
-                        .foregroundColor(.blue) // Dostosuj kolor do swoich preferencji
+                        .foregroundColor(.blue)
                 case "SHIPPED":
                     Image(systemName: "shippingbox")
-                        .foregroundColor(.green) // Dostosuj kolor do swoich preferencji
+                        .foregroundColor(.green)
                 case "SEND":
                     Image(systemName: "paperplane")
-                        .foregroundColor(.purple) // Dostosuj kolor do swoich preferencji
+                        .foregroundColor(.purple)
                 default:
                     Text("Unknown Status")
                 }
@@ -65,7 +64,7 @@ struct OrderRow: View {
                 if let products = order.products?.allObjects as? [Product] {
                     ForEach(products, id: \.id) { product in
                         HStack {
-                            Text(product.name ?? "Unknown Name")
+                            Text("\(getCount(id:product.id, ordered_items:order.ordered_items as! [Int64]))x \(product.name ?? "Unknown Name")")
                             Spacer()
                             Text("\(product.price)")
                         }
@@ -73,6 +72,7 @@ struct OrderRow: View {
                         .background(Color.green.opacity(0.2))
                         .cornerRadius(8)
                     }
+                    
                 }
             }
         }
@@ -91,4 +91,12 @@ struct OrderRow: View {
         dateFormatter.dateStyle = .short
         return dateFormatter.string(from: date)
     }
+    
+    private func getCount(id: Int64, ordered_items: [Int64]) -> Int {
+        return ordered_items.filter { $0 == id }.count
+    }
+}
+
+#Preview {
+    OrdersView()
 }

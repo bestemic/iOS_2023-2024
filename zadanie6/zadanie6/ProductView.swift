@@ -21,7 +21,7 @@ struct ProductView: View {
             Text("Product Category: \(product.category?.name ?? "")")
                 .padding()
             Button(action: {
-                cart.addToCart(key: product.name!)
+                cart.addToCart(productId: Int(product.id))
             }) {
                 Text("Add to Cart")
                     .padding()
