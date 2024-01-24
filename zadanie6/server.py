@@ -1,5 +1,10 @@
 from flask import Flask, jsonify, request
 from datetime import datetime
+import stripe
+
+import os
+
+stripe.api_key = os.environ.get('STRIPE_KEY')
 
 app = Flask(__name__)
 
@@ -134,6 +139,46 @@ def add_product():
         return jsonify(new_product['id']), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/create-payment-intent', methods=['POST'])
+def payment_sheet():
+    data = request.get_json()
+    orders = data.get('orders', {})
+            
+    new_order_products = []
+    for product_id, quantity in orders.items():
+        for _ in range(quantity):
+            new_order_products.append(int(product_id))
+            
+    price = calculate_total_value(orders)
+    
+    new_order = {
+        'id': len(orders_data) + 1,
+        'total_value': price,
+        'order_date': get_current_date(),
+        'order_status': 'PROCESSING',  
+        'products': new_order_products
+    }
+    orders_data.append(new_order)
+        
+    customer = stripe.Customer.create()
+    ephemeralKey = stripe.EphemeralKey.create(
+        customer=customer['id'],
+        stripe_version='2023-10-16',
+    )
+    paymentIntent = stripe.PaymentIntent.create(
+        amount=int(price*100),
+        currency='pln',
+        customer=customer['id'],
+        automatic_payment_methods={
+            'enabled': True,
+        },
+    )
+    return jsonify(order=new_order, paymentIntent=paymentIntent.client_secret,
+                 ephemeralKey=ephemeralKey.secret,
+                 customer=customer.id,
+                 publishableKey='pk_test_51Oc6IkLaDNDnMdYCD5XACAn1voq9GA9X3yI2JgiOddKv6uBPXBeX4Rplagma9J5g0fjsEvCOjXbuqR0UFEwuWYD00086xpZtSU')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

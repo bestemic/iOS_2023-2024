@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import StripeCore
 
 @main
 struct zadanie6App: App {
@@ -22,6 +23,9 @@ struct zadanie6App: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onOpenURL(perform: { url in
+                    StripeAPI.handleURLCallback(with: url)
+                })
         }
     }
 }
