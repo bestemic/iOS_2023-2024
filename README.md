@@ -84,7 +84,7 @@
 
 ### Zad 7 Testy
 
-❌ 3.0 stworzyć 30 asercji testów funkcjonalnych
+✅ 3.0 stworzyć 30 asercji testów funkcjonalnych
 
 ❌ 3.5 stworzyć dodatkowo 20 asercji testów jednostkowych
 
